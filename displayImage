@@ -12,7 +12,7 @@ background.fill((0,0,0))
 font = pygame.font.SysFont("monospace", 24)
 
 #Set the folder path where the PNG files are located
-folder_path = "C:\Users\70010669\Pictures"
+folder_path = ""
 
 while True:
 	#Get a list of all files in the folder
