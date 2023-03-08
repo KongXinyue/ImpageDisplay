@@ -1,0 +1,48 @@
+import os
+import pygame
+
+#Initialize Pygame
+pygame.init()
+
+#Set the display mode to fullscreen
+screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+
+background = pygame.Surface(screen.get_size())
+background.fill((0,0,0))
+font = pygame.font.SysFont("monospace", 24)
+
+#Set the folder path where the PNG files are located
+folder_path = "C:\Users\70010669\Pictures"
+
+while True:
+	#Get a list of all files in the folder
+	file_list = os.listdir(folder_path)
+
+	#Filter the list to only include PNG files
+	png_list = [filename for filename in file_list if filename.endswith(".png")]
+
+	#Sort the list by modification time
+	png_list.sort(key=lambda x: os.path.getmtime(os.path.join(folder_path, png_list[0])), reverse=True)
+
+	#Load most recent PNG file
+	try:
+		latest_png = pygame.image.load(os.path.join(folder_path, png_list[0]))
+	except IndexError:
+		text = font.render("No PNG files found", True, (255,255,255))
+		screen.blit(text, (10,10))
+		pygame.display.flip()
+		continue
+
+	#Resize image to fit the screen
+	latest_png = pygame.transform.scale(latest_png, screen.get_size())
+	screen.blit(latest_png, (0,0))
+
+	#Update the display
+	pygame.display.flip()
+
+	#Check for quit events
+	for event in pygame.event.get()
+		if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
+		pygame.quit()
+		exit()
+
